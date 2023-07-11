@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/pages/details_page.dart';
 import 'package:travel_app/pages/welcome_page.dart';
 
 void main(){
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Travel App',
-      home: const WelcomePage(),
+      home: const DetailPage(),
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
