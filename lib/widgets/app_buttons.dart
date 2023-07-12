@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/widgets/app_text.dart';
 
-import '../misc/colors.dart';
 
 class AppButton extends StatelessWidget {
 
@@ -11,12 +10,13 @@ class AppButton extends StatelessWidget {
   final Color backgroundColor;
   final double itemSize;
   final Color borderColor;
-  bool isIcon;
-  String? text;
-  IconData? icon;
+  final Color textColor;
+  final bool isIcon;
+  final String? text;
+  final IconData? icon;
 
-   AppButton({super.key, required this.width,required this.height, this.itemColor = Colors.white , this.backgroundColor = Colors.white,
-      required this.itemSize, this.borderColor = Colors.white,this.text ='1',this.icon,this.isIcon = false});
+   const AppButton({super.key, required this.width,required this.height, this.itemColor = Colors.white , this.backgroundColor = Colors.white,
+      required this.itemSize, this.borderColor = Colors.white,this.text ='1',this.icon,this.isIcon = false,this.textColor = Colors.black});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
           color: backgroundColor,
           border: Border.all(color: borderColor,width: 1)
       ),
-      child: isIcon?Center(child: Icon(icon,color: itemColor,)):Center(child: AppText(text: text.toString(),color: Colors.black,)),
+      child: isIcon?Center(child: Icon(icon,color: itemColor,)):Center(child: AppText(text: text.toString(),color: textColor,)),
     );
   }
 }
