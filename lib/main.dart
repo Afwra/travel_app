@@ -1,10 +1,16 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_app/pages/details_page.dart';
-import 'package:travel_app/pages/welcome_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_app/business_logic/app_cubit.dart';
+import 'package:travel_app/business_logic/app_cubit_logic.dart';
+import 'business_logic/bloc_observer.dart';
 
-void main(){
+void main() {
+  Bloc.observer = MyBlocObserver();
+
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,9 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Travel App',
-      home: const DetailPage(),
+      home: BlocProvider(
+        create: (context) => AppCubit(),
+        child:  AppCubitLogic(),
+      ),
       theme: ThemeData(
-        primarySwatch: Colors.blue
+          primarySwatch: Colors.blue
       ),
     );
   }

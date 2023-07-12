@@ -1,38 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/misc/colors.dart';
-import 'package:travel_app/pages/nav_pages/main_page.dart';
 import 'package:travel_app/widgets/app_large_text.dart';
 import 'package:travel_app/widgets/app_text.dart';
 import 'package:travel_app/widgets/responsive_button.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+import '../business_logic/app_cubit.dart';
 
-  @override
-  State<WelcomePage> createState() => _WelcomePageState();
-}
 
-class _WelcomePageState extends State<WelcomePage> {
+
+class WelcomePage extends StatelessWidget {
   final PageController _pageController = PageController();
 
-  List<String> images = [
+  final List<String> images = [
     'welcome-one.png',
     'welcome-two.png',
     'welcome-three.png',
   ];
 
-  List<String> bodyTexts = [
+  final List<String> bodyTexts = [
     'Mountain hikes give you an incredible sense of freedom along with endurance test.',
     'Explore breathtaking landscapes, immerse yourself in vibrant cultures, and embark on unforgettable adventures with our travel app.',
     'Discover hidden gems, indulge in culinary delights, and create lifelong memories with our curated travel experiences.',
   ];
+
+  WelcomePage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
         itemBuilder: (context, index) {
-          return buildPageItem(index);
+          return buildPageItem(index,AppCubit.get(context));
         },
         itemCount: images.length,
         scrollDirection: Axis.vertical,
@@ -41,7 +40,7 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  Widget buildPageItem(int index) {
+  Widget buildPageItem(int index,AppCubit cubit) {
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
@@ -79,13 +78,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 ResponsiveButton(
                   width: 100,
                   onTap: () {
-                    setState(() {
-                      if(index == 2){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainPage()));
-                      }else{
-                        _pageController.jumpToPage(index+1);
-                      }
-                    });
+                    cubit.getData();
                   },
                 ),
               ],
